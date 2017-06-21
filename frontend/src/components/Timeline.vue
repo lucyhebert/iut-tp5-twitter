@@ -1,7 +1,9 @@
 <template>
   <div class="timeline">
     <ul>
-      <li v-for="tweet in tweets">{{tweet.auteur}} : {{tweet.contenu}}</li>
+      <li v-for="tweet in tweets">
+        <tweet :tweet="tweet"/>
+      </li>
     </ul>
   </div>
 </template>
@@ -11,13 +13,16 @@
   var tweet2 = {auteur: 'Nico', contenu: 'Prout'}
   var tweet3 = {auteur: 'Guigui', contenu: 'Prout-pouet'}
 
+  import Tweet from './Tweet'
+
   export default {
     name: 'timeline',
     data () {
       return {
         tweets: [tweet1, tweet2, tweet3]
       }
-    }
+    },
+    components: {Tweet}
   }
 </script>
 
