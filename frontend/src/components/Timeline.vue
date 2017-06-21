@@ -9,20 +9,38 @@
 </template>
 
 <script>
-  var tweet1 = {auteur: 'Lulu', contenu: 'Pouet-pouet'}
-  var tweet2 = {auteur: 'Nico', contenu: 'Prout'}
-  var tweet3 = {auteur: 'Guigui', contenu: 'Prout-pouet'}
 
   import Tweet from './Tweet'
+  import Vue from 'vue'
+  import Resource from 'vue-resource'
+  Vue.use(Resource)
+
+  // var tweet1 = {auteur: 'Lulu', contenu: 'Pouet-pouet'}
+  // var tweet2 = {auteur: 'Nico', contenu: 'Prout'}
+  // var tweet3 = {auteur: 'Guigui', contenu: 'Prout-pouet'}
 
   export default {
     name: 'timeline',
     data () {
       return {
-        tweets: [tweet1, tweet2, tweet3]
+        tweets: []
       }
     },
-    components: {Tweet}
+    components: {Tweet},
+    methods: {
+      fetchTweets: function () {
+        this.$http.get('http://localhost:8080/list').then(response => {
+          // get body data
+          this.tweets = response.body
+          console.log(response.body)
+        }, response => {
+          // error callback
+        })
+      }
+    },
+    created () {
+      this.fetchTweets()
+    }
   }
 </script>
 
