@@ -35,8 +35,13 @@
         })
       },
       retweet: function (id) {
-        this.$emit('retweeted', id)
-        this.fetchTweets()
+        var data = new FormData()
+        data.append('utilisateur', 'Guillaume')
+        for (var i = 0; i < this.tweets.length; i++) {
+          if (this.tweets[i].id === id) {
+            this.tweets[i].retweeters.push(data)
+          }
+        }
       }
     }
   }

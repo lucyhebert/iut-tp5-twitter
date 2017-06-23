@@ -53,7 +53,7 @@
       },
       retweet: function (id) {
         var data = new FormData()
-        data.append('utilisateur', 'Lulu')
+        data.append('utilisateur', 'Guillaume')
         data.append('tweet', id)
         this.$http.post('http://localhost:8080/retweet', data, {responseType: 'text'}).then(response => {
           this.$emit('retweeted', id)
