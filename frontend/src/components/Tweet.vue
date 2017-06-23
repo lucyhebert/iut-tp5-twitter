@@ -18,6 +18,7 @@
         </li>
         <li class="button">
           <icon name="retweet"/>
+          <span>{{tweet.retweeters.length}}</span>
         </li>
         <li class="button">
           <icon name="heart"/>
