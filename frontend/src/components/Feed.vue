@@ -5,7 +5,7 @@
     </div>
     <div v-else>
       <ul>
-        <li v-for="tweet in tweets">
+        <li class="tweet" v-for="tweet in tweets">
           <tweet :tweet="tweet"/>
         </li>
       </ul>
@@ -43,5 +43,17 @@
 
   a {
     color: #42b983;
+  }
+
+  li.tweet:first-child {
+   border-top-width: 1px;
+  }
+
+  li.tweet {
+   border-style: solid;
+   border-width: 0 1px 1px 1px;
+   border-color: gray;
+   width: 500px;
+   margin: auto;
   }
 </style>

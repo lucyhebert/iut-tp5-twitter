@@ -1,6 +1,11 @@
 - Ajouter variables d'environnement avec Rapid Env Editor :
 	- User variables : PATH, expandable string, F:\LP_DEVOPS\javaEE\logiciels_MSwindows\node-v8.1.2-win-x64
 	- User variables : PATH, expandable string, F:\LP_DEVOPS\javaEE\logiciels_MSwindows\npm-5.0.3
+- Paramétrer le proxy :
+	- npm config set proxy http://proxy.univ-lyon1.fr:3128
+	- npm config set https-proxy http://proxy.univ-lyon1.fr:3128
+
+
 - Ouvrir séparément backend et frontend dans IntelliJ
 - Lancer uWamp ou mysql
 - Dans backend : 
@@ -12,3 +17,4 @@
 	- npm run dev
 	
 	npmrc : config npm
+	
