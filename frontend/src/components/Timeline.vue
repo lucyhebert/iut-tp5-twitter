@@ -2,11 +2,13 @@
   <div class="timeline">
     <div> {{ (this.utilisateurCourant ? "Utilisateur connecté : " + this.utilisateurCourant : "Identifiez-vous :") }} </div>
     <utilisateurs :utilisateurs="utilisateurs" @userChanged="onChange"/>
+    <postTweet :postTweet="postTweet"/>
     <feed :tweets="tweets" :loading="loading" :utilisateurCourant="utilisateurCourant" @retweeted="retweet" />
   </div>
 </template>
 
 <script>
+  import PostTweet from './PostTweet'
   import Utilisateurs from './Utilisateurs'
   import Feed from './Feed'
   import Vue from 'vue'
@@ -27,7 +29,7 @@
         utilisateurs: []
       }
     },
-    components: {Feed, Utilisateurs},
+    components: {Feed, Utilisateurs, PostTweet},
     methods: {
       fetchTweets: function () {
         this.$http.get('http://localhost:8080/list').then(response => {
