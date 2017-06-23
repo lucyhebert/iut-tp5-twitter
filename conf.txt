@@ -9,12 +9,21 @@
 - Ouvrir séparément backend et frontend dans IntelliJ
 - Lancer uWamp ou mysql
 - Dans backend : 
-	- Lancer gradlew.bat
+	- $ gradlew.bat
 	- rafraîchir projet Gradle
 	- bootrun
 - Dans frontend : 
-	- paraméter le proxy (slide 4)
-	- npm run dev
+	- $  install vue-cli
+	- $  npm install --global vue-cli
+	- $  cd iut-tp5-twitter
+	- $  vue init webpack frontend -> choose all defaults
+	- $  cd frontend
+	- $  npm install
+	- $  npm install --save vue-resource
+	- $  npm install --save vue-awesome
+	- $  npm install --save moment
+	- Modifier le port d'écoute dans frontend/config/index.js
+	- $  npm run dev
 	
 	npmrc : config npm
 	

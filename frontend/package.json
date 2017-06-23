@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "lucyhebert <lucyhebert@free.fr>",
+  "author": "L. Hebert <lucyhebert@free.fr>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
