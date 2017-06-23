@@ -1,0 +1,14 @@
+- Ajouter variables d'environnement avec Rapid Env Editor :
+	- User variables : PATH, expandable string, F:\LP_DEVOPS\javaEE\logiciels_MSwindows\node-v8.1.2-win-x64
+	- User variables : PATH, expandable string, F:\LP_DEVOPS\javaEE\logiciels_MSwindows\npm-5.0.3
+- Ouvrir séparément backend et frontend dans IntelliJ
+- Lancer uWamp ou mysql
+- Dans backend : 
+	- Lancer gradlew.bat
+	- rafraîchir projet Gradle
+	- bootrun
+- Dans frontend : 
+	- paraméter le proxy (slide 4)
+	- npm run dev
+	
+	npmrc : config npm
