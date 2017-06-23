@@ -1,6 +1,6 @@
 <template>
   <div class="timeline">
-    <feed :tweets="tweets"/>
+    <feed :tweets="tweets" :loading="loading"/>
   </div>
 </template>
 
@@ -14,7 +14,8 @@
     name: 'timeline',
     data () {
       return {
-        tweets: []
+        tweets: [],
+        loading: true
       }
     },
     components: {Feed},
@@ -23,7 +24,9 @@
         this.$http.get('http://localhost:8080/list').then(response => {
           // get body data
           this.tweets = response.body
-          console.log(response.body)
+          this.loading = false
+          console.log(this.tweets)
+          console.log(this.loading)
         }, response => {
           // error callback
         })
