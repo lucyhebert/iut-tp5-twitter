@@ -41,7 +41,7 @@
   import moment from 'moment'
 
   export default {
-    created () {+
+    created () {
       moment.locale('fr')
     },
     name: 'tweet',
@@ -55,7 +55,10 @@
         var data = new FormData()
         data.append('utilisateur', 'Lulu')
         data.append('tweet', id)
-        this.$http.post('http://localhost:8080/retweet', data, {responseType: 'text'})
+        this.$http.post('http://localhost:8080/retweet', data, {responseType: 'text'}).then(response => {
+          this.$emit('retweeted', id)
+          console.log('reponse')
+        })
       }
     }
   }

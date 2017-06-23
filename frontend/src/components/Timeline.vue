@@ -1,6 +1,6 @@
 <template>
   <div class="timeline">
-    <feed :tweets="tweets" :loading="loading"/>
+    <feed :tweets="tweets" :loading="loading" @retweeted="retweet" />
   </div>
 </template>
 
@@ -11,6 +11,9 @@
   Vue.use(Resource)
 
   export default {
+    created () {
+      this.fetchTweets()
+    },
     name: 'timeline',
     data () {
       return {
@@ -30,10 +33,11 @@
         }, response => {
           // error callback
         })
+      },
+      retweet: function (id) {
+        this.$emit('retweeted', id)
+        this.fetchTweets()
       }
-    },
-    created () {
-      this.fetchTweets()
     }
   }
 </script>
