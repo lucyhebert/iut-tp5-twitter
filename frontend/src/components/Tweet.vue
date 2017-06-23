@@ -17,10 +17,20 @@
           <icon name="reply"/>
         </li>
         <li class="button">
-          <a @click="retweet(tweet.id)">
+          <span v-if="canRetweet()">
+            <a @click="retweet(tweet.id)">
+              <icon name="retweet"/>
+              <span>
+                {{tweet.retweeters.length}}
+              </span>
+            </a>
+          </span>
+          <span v-else>
             <icon name="retweet"/>
-            <span>{{tweet.retweeters.length}}</span>
-          </a>
+            <span>
+              {{tweet.retweeters.length}}
+            </span>
+          </span>
         </li>
         <li class="button">
           <icon name="heart"/>
@@ -58,6 +68,17 @@
         this.$http.post('http://localhost:8080/retweet', data, {responseType: 'text'}).then(response => {
           this.$emit('retweeted', id)
         })
+      },
+      canRetweet: function () {
+        if (this.utilisateurCourant === this.tweet.auteur.handle || !this.utilisateurCourant) {
+          return false
+        }
+        for (var i = 0; i < this.tweet.retweeters.length; i++) {
+          if (this.utilisateurCourant === this.tweet.retweeters[i].handle) {
+            return false
+          }
+        }
+        return true
       }
     }
   }
