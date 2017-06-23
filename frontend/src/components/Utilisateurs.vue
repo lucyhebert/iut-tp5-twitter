@@ -13,7 +13,13 @@
 
   export default {
     name: 'utilisateur',
-    props: [ 'utilisateurs' ]
+    props: [ 'utilisateurs', 'utilisateurCourant' ],
+    methods: {
+      onChange: function (utilisateur) {
+        this.utilisateurCourant = utilisateur
+        this.$emit('userChanged', this.utilisateurCourant)
+      }
+    }
   }
 
 </script>

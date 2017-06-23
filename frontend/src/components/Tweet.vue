@@ -45,7 +45,7 @@
       moment.locale('fr')
     },
     name: 'tweet',
-    props: ['tweet'],
+    props: ['tweet', 'utilisateurCourant'],
     components: {Icon},
     methods: {
       moment: function (date) {
@@ -53,11 +53,10 @@
       },
       retweet: function (id) {
         var data = new FormData()
-        data.append('utilisateur', 'Guillaume')
+        data.append('utilisateur', this.utilisateurCourant)
         data.append('tweet', id)
         this.$http.post('http://localhost:8080/retweet', data, {responseType: 'text'}).then(response => {
           this.$emit('retweeted', id)
-          console.log('reponse')
         })
       }
     }

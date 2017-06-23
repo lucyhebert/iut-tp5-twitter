@@ -1,7 +1,8 @@
 <template>
   <div class="timeline">
-    <utilisateurs :utilisateurs="utilisateurs"/>
-    <feed :tweets="tweets" :loading="loading" @retweeted="retweet" />
+    <div> {{ (this.utilisateurCourant ? "Utilisateur connecté : " + this.utilisateurCourant : "Identifiez-vous :") }} </div>
+    <utilisateurs :utilisateurs="utilisateurs" @userChanged="onChange"/>
+    <feed :tweets="tweets" :loading="loading" :utilisateurCourant="utilisateurCourant" @retweeted="retweet" />
   </div>
 </template>
 
@@ -18,6 +19,7 @@
       this.fetchUtilisateurs()
     },
     name: 'timeline',
+    props: [ 'utilisateurCourant' ],
     data () {
       return {
         tweets: [],
@@ -45,12 +47,16 @@
       },
       retweet: function (id) {
         var data = new FormData()
-        data.append('utilisateur', 'Guillaume')
+        data.append('utilisateur', this.utilisateurCourant)
         for (var i = 0; i < this.tweets.length; i++) {
           if (this.tweets[i].id === id) {
             this.tweets[i].retweeters.push(data)
           }
         }
+      },
+      onChange: function (utilisateur) {
+        this.utilisateurCourant = utilisateur
+        this.$emit('userChanged', utilisateur)
       }
     }
   }
