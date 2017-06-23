@@ -1,10 +1,12 @@
 <template>
   <div class="timeline">
+    <utilisateurs :utilisateurs="utilisateurs"/>
     <feed :tweets="tweets" :loading="loading" @retweeted="retweet" />
   </div>
 </template>
 
 <script>
+  import Utilisateurs from './Utilisateurs'
   import Feed from './Feed'
   import Vue from 'vue'
   import Resource from 'vue-resource'
@@ -13,23 +15,30 @@
   export default {
     created () {
       this.fetchTweets()
+      this.fetchUtilisateurs()
     },
     name: 'timeline',
     data () {
       return {
         tweets: [],
-        loading: true
+        loading: true,
+        utilisateurs: []
       }
     },
-    components: {Feed},
+    components: {Feed, Utilisateurs},
     methods: {
       fetchTweets: function () {
         this.$http.get('http://localhost:8080/list').then(response => {
-          // get body data
           this.tweets = response.body
           this.loading = false
-          console.log(this.tweets)
-          console.log(this.loading)
+        }, response => {
+          // error callback
+        })
+      },
+      fetchUtilisateurs: function () {
+        this.$http.get('http://localhost:8080/utilisateurs').then(response => {
+          this.utilisateurs = response.body
+          console.log(this.utilisateurs)
         }, response => {
           // error callback
         })
