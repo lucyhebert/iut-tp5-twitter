@@ -2,7 +2,8 @@
   <div class="timeline">
     <div> {{ (this.utilisateurCourant ? "Utilisateur connecté : " + this.utilisateurCourant : "Identifiez-vous :") }} </div>
     <utilisateurs :utilisateurs="utilisateurs" @userChanged="onChange"/>
-    <postTweet :postTweet="postTweet"/>
+    <br>
+    <postTweet @newTweet="postNewTweet"/>
     <feed :tweets="tweets" :loading="loading" :utilisateurCourant="utilisateurCourant" @retweeted="retweet" />
   </div>
 </template>
@@ -26,7 +27,8 @@
       return {
         tweets: [],
         loading: true,
-        utilisateurs: []
+        utilisateurs: [],
+        newTweetId: ' '
       }
     },
     components: {Feed, Utilisateurs, PostTweet},
@@ -42,7 +44,6 @@
       fetchUtilisateurs: function () {
         this.$http.get('http://localhost:8080/utilisateurs').then(response => {
           this.utilisateurs = response.body
-          console.log(this.utilisateurs)
         }, response => {
           // error callback
         })
@@ -59,6 +60,19 @@
       onChange: function (utilisateur) {
         this.utilisateurCourant = utilisateur
         this.$emit('userChanged', utilisateur)
+      },
+      postNewTweet: function (newTweet) {
+        var data = new FormData()
+        data.append('auteur', this.utilisateurCourant)
+        data.append('contenu', newTweet)
+        this.$http.post('http://localhost:8080/tweet', data, {responseType: 'text'}).then(response => {
+          this.$http.get('http://localhost:8080/tweet/' + response.body).then(response => {
+            this.$emit('newTweet', response.body)
+            this.tweets.push(response.body)
+          }, response => {
+            // error callback
+          })
+        })
       }
     }
   }

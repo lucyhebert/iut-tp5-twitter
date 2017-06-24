@@ -9,4 +9,6 @@ public interface TweetRepository extends CrudRepository<Tweet,Integer> {
 
     List<Tweet> findAllByOrderByDateDesc();
 
+    Tweet findFirstByOrderByIdDesc();
+
 }

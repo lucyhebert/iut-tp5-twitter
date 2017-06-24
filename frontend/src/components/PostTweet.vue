@@ -1,14 +1,27 @@
 <template>
   <div class="postTweet">
-    <input type="text"><br>
-    <button type="button">Tweet</button>
+    <textarea v-model="textTweet" placeholder="Nouveau tweet"></textarea>
+    <br>
+    <button v-on:click="postNewTweet(textTweet)">Tweet</button>
   </div>
 </template>
 
 <script>
 
   export default {
-    name: 'postTweet'
+    name: 'postTweet',
+    data () {
+      return {
+        newTweet: ''
+      }
+    },
+    props: ['utilisateurCourant', 'textTweet'],
+    methods: {
+      postNewTweet: function (textTweet) {
+        this.newTweet = textTweet
+        this.$emit('newTweet', this.newTweet)
+      }
+    }
   }
 
 </script>
