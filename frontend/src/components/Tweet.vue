@@ -1,46 +1,50 @@
 <template>
   <div class="tweet">
-    <div>
-      <strong>
-        {{tweet.auteur.prenom}} {{tweet.auteur.nom}}
-      </strong>
-      <span class="handle">
-        {{tweet.auteur.handle}} - {{moment(tweet.date).fromNow()}}
-      </span>
+    <div class="column">
+      <img :src="avatar"/>
     </div>
-    <div>
-      {{tweet.contenu}}
-    </div>
-    <div>
-      <ul>
-        <li class="button">
-          <icon name="reply"/>
-        </li>
-        <li class="button">
-          <span v-if="canRetweet()">
-            <a @click="retweet(tweet.id)">
+    <div class="column">
+      <div>
+        <strong>
+          {{tweet.auteur.prenom}} {{tweet.auteur.nom}}
+        </strong>
+        <span class="handle">
+          {{tweet.auteur.handle}} - {{moment(tweet.date).fromNow()}}
+        </span>
+      </div>
+      <div>
+        {{tweet.contenu}}
+      </div>
+      <div>
+        <ul>
+          <li class="button">
+            <icon name="reply"/>
+          </li>
+          <li class="button">
+            <span v-if="canRetweet()">
+              <a @click="retweet(tweet.id)">
+                <icon name="retweet"/>
+                <span>
+                  {{tweet.retweeters.length}}
+                </span>
+              </a>
+            </span>
+            <span v-else>
               <icon name="retweet"/>
               <span>
                 {{tweet.retweeters.length}}
               </span>
-            </a>
-          </span>
-          <span v-else>
-            <icon name="retweet"/>
-            <span>
-              {{tweet.retweeters.length}}
             </span>
-          </span>
-        </li>
-        <li class="button">
-          <icon name="heart"/>
-        </li>
-        <li class="button">
-          <icon name="envelope"/>
-        </li>
-      </ul>
+          </li>
+          <li class="button">
+            <icon name="heart"/>
+          </li>
+          <li class="button">
+            <icon name="envelope"/>
+          </li>
+        </ul>
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -57,6 +61,12 @@
     name: 'tweet',
     props: ['tweet', 'utilisateurCourant'],
     components: {Icon},
+    computed: {
+      avatar: function () {
+        var handle = this.tweet.auteur.handle
+        return 'https://robohash.org/' + handle + '?size=100x100'
+      }
+    },
     methods: {
       moment: function (date) {
         return moment(date)
@@ -96,5 +106,9 @@
 
   span.handle {
    color: gray;
+  }
+
+  div.column {
+    display: inline-block;
   }
 </style>
