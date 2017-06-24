@@ -4,7 +4,7 @@
     <utilisateurs :utilisateurs="utilisateurs" @userChanged="onChange"/>
     <br>
     <postTweet @newTweet="postNewTweet"/>
-    <feed :tweets="tweets" :loading="loading" :utilisateurCourant="utilisateurCourant" @retweeted="retweet" />
+    <feed :tweets="sortedTweets" :loading="loading" :utilisateurCourant="utilisateurCourant" @retweeted="retweet" />
   </div>
 </template>
 
@@ -32,6 +32,11 @@
       }
     },
     components: {Feed, Utilisateurs, PostTweet},
+    computed: {
+      sortedTweets: function () {
+        return this.tweets.sort((a, b) => b.date - a.date)
+      }
+    },
     methods: {
       fetchTweets: function () {
         this.$http.get('http://localhost:8080/list').then(response => {
