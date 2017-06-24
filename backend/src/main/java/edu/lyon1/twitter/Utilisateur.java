@@ -1,9 +1,10 @@
 package edu.lyon1.twitter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Collection;
 
 @Entity(name = "utilisateurs")
 public class Utilisateur implements Serializable {

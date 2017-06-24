@@ -1,6 +1,6 @@
 <template>
   <div class="postTweet">
-    <textarea v-model="textTweet" placeholder="Nouveau tweet"></textarea>
+    <textarea cols="40" v-model="textTweet" placeholder="Nouveau tweet"></textarea>
     <br>
     <button v-on:click="postNewTweet(textTweet)">Tweet</button>
   </div>
