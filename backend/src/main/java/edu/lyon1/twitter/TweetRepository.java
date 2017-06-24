@@ -9,6 +9,8 @@ public interface TweetRepository extends CrudRepository<Tweet,Integer> {
 
     List<Tweet> findAllByOrderByDateDesc();
 
+    List<Tweet> findAllByAuteurFollowee(Utilisateur followee);
+
     Tweet findFirstByOrderByIdDesc();
 
 }

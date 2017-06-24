@@ -67,5 +67,13 @@ public class TweetController {
         return tweetRepository.findOne(id);
     }
 
+    @RequestMapping("/follow/{follower}/{followee}")
+    public void follow(@PathVariable("follower") String followerHandle, @PathVariable("followee") String followeeHandle) {
+        Utilisateur follower = tweetRepository.findOne(followerHandle);
+        Utilisateur followee = tweetRepository.findOne(followeeHandle);
+
+        follower.getFollowees().add(followee);
+        utilisateurRepository.save(follower);
+    }
 
 }

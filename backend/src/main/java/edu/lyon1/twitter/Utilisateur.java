@@ -12,6 +12,22 @@ public class Utilisateur implements Serializable {
     private Timestamp inscription;
     private String prenom;
     private String nom;
+    @ManyToMany
+    @JoinTable(
+            name="follows",
+            joinColumns = @JoinColumn( name="handle"),
+            inverseJoinColumns = @JoinColumn( name="follower")
+    )
+    @JsonIgnore
+    private Collection<Utilisateur> followers;
+    @ManyToMany
+    @JoinTable(
+            name="follows",
+            joinColumns = @JoinColumn( name="handle"),
+            inverseJoinColumns = @JoinColumn( name="followee")
+    )
+    @JsonIgnore
+    private Collection<Utilisateur> followees;
 
     public Utilisateur(String handle, Timestamp inscription, String prenom, String nom) {
         this.handle = handle;
@@ -53,5 +69,21 @@ public class Utilisateur implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Collection<Utilisateur> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Collection<Utilisateur> followers) {
+        this.followers = followers;
+    }
+
+    public Collection<Utilisateur> getFollowees() {
+        return followees;
+    }
+
+    public void setFollowees(Collection<Utilisateur> followees) {
+        this.followees = followees;
     }
 }
